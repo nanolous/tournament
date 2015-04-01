@@ -4,11 +4,11 @@
 #
 import psycopg2
 
-
+# Method to connect to DB.
 def connect():
     return psycopg2.connect("dbname=tournament")
 
-
+# Deletes all matches from matches table.
 def deleteMatches():
     DB = psycopg2.connect("dbname=tournament")
     c = DB.cursor()
@@ -16,7 +16,7 @@ def deleteMatches():
     DB.commit()
     DB.close()
 
-
+# Deletes all players from players table.
 def deletePlayers():
     DB = psycopg2.connect("dbname=tournament")
     c = DB.cursor()
@@ -24,7 +24,7 @@ def deletePlayers():
     DB.commit()
     DB.close()
 
-
+# Selects the count of players from the players table and fetches the result set.
 def countPlayers():
     DB = psycopg2.connect("dbname=tournament")
     c = DB.cursor()
@@ -34,7 +34,7 @@ def countPlayers():
     return rows[0]
     DB.close()
 
-
+# Adds a player to the players table, passing in the string variable (name) to insert in the name column.
 def registerPlayer(name):
     """Adds a player to the tournament database.
   
@@ -50,7 +50,7 @@ def registerPlayer(name):
     DB.commit()
     DB.close()
 
-
+# Defined in the standings view, the query selects all rows from the standings view and fetches the result set.
 def playerStandings():
     """Returns a list of the players and their win records, sorted by wins.
 
@@ -72,7 +72,7 @@ def playerStandings():
     return rows
     DB.close()
 
-
+# Performs a series of SQL statements to satisfy the tests: effectively inserting the appropriate players for reporting matches and performing a delete to return the correct result set.
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
 
@@ -91,7 +91,7 @@ def reportMatch(winner, loser):
     DB.close()
     
  
- 
+ # Matches winners/losers using a self join query on the standings view.
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
   
