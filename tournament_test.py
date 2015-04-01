@@ -4,6 +4,7 @@
 
 from tournament import *
 
+
 def testDeleteMatches():
     deleteMatches()
     print "1. Old matches can be deleted."
@@ -79,7 +80,6 @@ def testStandingsBeforeMatches():
     print "6. Newly registered players appear in the standings with no matches."
 
 
-#Resolve the single quote. "O'Neal".
 def testReportMatches():
     deleteMatches()
     deletePlayers()
