@@ -18,7 +18,7 @@ Winner INTEGER references PLAYERS(ID),
 Loser INTEGER references PLAYERS(ID));
 
 -- Standings view, aggregates matches data per player with fields specified from players table, and a join from the matches table.
-CREATE VIEW AS STANDINGS 
+CREATE VIEW STANDINGS AS
 SELECT players.id, players.name,COUNT(matches.winner) AS wins, 
 COUNT(DISTINCT matches.loser) + COUNT(matches.winner) AS matches 
 FROM players LEFT JOIN matches ON players.id = matches.winner 
