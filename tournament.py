@@ -5,8 +5,11 @@
 import psycopg2
 
 # Method to connect to DB.
-def connect():
-    return psycopg2.connect("dbname=tournament")
+try:
+    def connect():
+        return psycopg2.connect("dbname=tournament")
+except:
+    print "Unable to connect to database"
 
 # Deletes all matches from matches table.
 def deleteMatches():
@@ -78,7 +81,7 @@ def playerStandings():
     DB.close()
     return rows
 
-# Performs a series of SQL statements to satisfy the tests: effectively inserting the appropriate players for reporting matches and performing a delete to return the correct result set.
+# Passes in string vars to loop through standings view and insert players to the matches table.
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
 
@@ -88,14 +91,9 @@ def reportMatch(winner, loser):
     """
     DB = connect()
     c = DB.cursor()
-    SQL = "INSERT INTO Matches(winner, loser) SELECT p1.ID, p2.ID FROM (SELECT ID FROM Standings) p1, (SELECT ID FROM Standings) p2 WHERE p1.ID < p2.ID GROUP BY p1.ID, p2.ID ORDER BY p1.ID ASC, p2.ID ASC OFFSET 0 LIMIT 1;"
-    c.execute(SQL)
-    DB.commit()
-    SQL = "INSERT INTO Matches(winner, loser) SELECT p1.ID, p2.ID FROM (SELECT ID FROM Standings OFFSET 2) p1, (SELECT ID FROM Standings OFFSET 3) p2 WHERE p1.ID <> p2.ID;" 
-    c.execute(SQL)
-    DB.commit()
-    SQL = "DELETE FROM Matches WHERE ctid IN (SELECT ctid FROM Matches OFFSET 2);"
-    c.execute(SQL)
+    SQL = 'INSERT INTO Matches(winner, loser) VALUES (%s, %s);'
+    data = (winner, loser) 
+    c.execute(SQL, data)
     DB.commit()
     DB.close()
  
