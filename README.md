@@ -22,4 +22,3 @@ Setup:<br>
    execute: python tournament_test.py<br>
 
 Credits to Udacity & Stackoverflow
->>>>>>> a415cad888b2cc4eb6757349114c98e1dcc14e6c
