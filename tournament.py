@@ -5,38 +5,40 @@
 import psycopg2
 
 # Method to connect to DB.
-try:
-    def connect():
+def connect():
+    try:
         return psycopg2.connect("dbname=tournament")
-except:
-    print "Unable to connect to database"
+    except:
+        print "Unable to connect to database"
 
-# Deletes all matches from matches table.
 def deleteMatches():
     DB = connect()
     c = DB.cursor()
     SQL = "DELETE FROM Matches"
+    # Deletes all matches from matches table.
     c.execute(SQL)
     DB.commit()
     DB.close()
 
-# Deletes all players from players table.
 def deletePlayers():
     DB = connect()
     c = DB.cursor()
     SQL = "DELETE FROM Players"
+    # Deletes all players from players table.
     c.execute(SQL)
     DB.commit()
     DB.close()
 
-# Selects the count of players from the players table and fetches the result set.
 def countPlayers():
     DB = connect()
     c = DB.cursor()
     SQL = "SELECT COUNT(*) FROM Players"
+    # Selects the count of players from the players table.
     c.execute(SQL)
+    # Returns a single row.
     rows = c.fetchone()
     DB.commit()
+    # Returns fetched result set from rows variable.
     return rows[0]
     DB.close()
 
@@ -52,8 +54,11 @@ def registerPlayer(name):
     """
     DB = connect()
     c = DB.cursor()
+    # Define SQL query. Insert into the players table, passing in name variable from unit test method.
     SQL = "INSERT INTO Players (name) VALUES (%s);"
+    # Sets data to name tuple for cursor.
     data = (name,)
+    # Cursor executes SQL query, passing in the data tuple for insert.
     c.execute(SQL, data)
     DB.commit()
     DB.close()
@@ -74,14 +79,16 @@ def playerStandings():
     """
     DB = connect()
     c = DB.cursor()
+    # Standings view commented in tournament_test.py.
     SQL = "SELECT * FROM Standings"
     c.execute(SQL)
+    # Fetch all rows.
     rows = c.fetchall()
     DB.commit()
-    DB.close()
     return rows
+    DB.close()
 
-# Passes in string vars to loop through standings view and insert players to the matches table.
+
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
 
@@ -91,8 +98,11 @@ def reportMatch(winner, loser):
     """
     DB = connect()
     c = DB.cursor()
-    SQL = 'INSERT INTO Matches(winner, loser) VALUES (%s, %s);'
-    data = (winner, loser) 
+    # Insert string variables into matches table.
+    SQL = "INSERT INTO Matches(winner, loser) VALUES (%s, %s);"
+    # Data variable tuple for cursor.
+    data = (winner, loser)
+    # Execute SQL passing in the string variables.
     c.execute(SQL, data)
     DB.commit()
     DB.close()
@@ -115,9 +125,11 @@ def swissPairings():
     """
     DB = connect()
     c = DB.cursor()
-    SQL = "SELECT p1.ID AS ID1, p1.Name AS Name1, p2.ID AS ID2, p2.Name AS Name2 FROM Standings p1, Standings p2 WHERE p1.wins = p2.wins AND p1.ID <> p2.ID LIMIT 2;"
+    # Swiss_pairings view commented in tournament_test.py.
+    SQL = "SELECT * FROM Swiss_Pairings"
     c.execute(SQL)
+    # Fetch all rows.
     rows = c.fetchall()
     DB.commit()
-    DB.close()
     return rows
+    DB.close()

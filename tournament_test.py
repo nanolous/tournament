@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-#
-# Test cases for tournament.py
+# Tournament.py tests
 
 from tournament import *
 
