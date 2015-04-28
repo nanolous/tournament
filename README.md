@@ -16,8 +16,8 @@ Setup:<br>
 5. Import the tournament.sql file (Creates db and tables)<br>
 	execute: \i tournament.sql<br>
 6. Stop psql utility<br>
-	hit 'ctrl + z'
+	hit 'ctrl + z'<br>
 7. Execute the tests from the command prompt:<br>
-   execute: python tournament_test.py
+   execute: python tournament_test.py<br>
 
 Credits to Udacity & Stackoverflow
