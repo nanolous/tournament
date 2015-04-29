@@ -6,8 +6,8 @@ It effectively exercies SQL to create the DB structure, players, matches, and mo
 
 Postgresql and Psycopg2 are the tools for development.
 
-Setup:<br>
-=======
+Setup:
+========
 0. Download the tournament zip file<br>
 1. Extract the zip file to a directory<br>
 2. Launch a command prompt<br>
