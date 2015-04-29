@@ -1,5 +1,8 @@
 -- Creates the Tournament db.
-CREATE DATABASE Tournament;
+CREATE DATABASE tournament;
+
+-- Connects to the Tournament db.
+\c tournament
 
 -- Create Players table if it doesn't exist.
 CREATE TABLE IF NOT EXISTS Players (

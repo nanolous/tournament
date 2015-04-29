@@ -38,9 +38,9 @@ def countPlayers():
     # Returns a single row.
     rows = c.fetchone()
     DB.commit()
+    DB.close()
     # Returns fetched result set from rows variable.
     return rows[0]
-    DB.close()
 
 # Adds a player to the players table, passing in the string variable (name) to insert in the name column.
 def registerPlayer(name):
@@ -85,8 +85,8 @@ def playerStandings():
     # Fetch all rows.
     rows = c.fetchall()
     DB.commit()
-    return rows
     DB.close()
+    return rows
 
 
 def reportMatch(winner, loser):
@@ -131,5 +131,5 @@ def swissPairings():
     # Fetch all rows.
     rows = c.fetchall()
     DB.commit()
-    return rows
     DB.close()
+    return rows
