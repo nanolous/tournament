@@ -6,19 +6,22 @@ It effectively exercies SQL to create the DB structure, players, matches, and mo
 
 Postgresql and Psycopg2 are the tools for development.
 
-Setup:<br>
-=======
-0. Download the tournament zip file<br>
-1. Extract the zip file to a directory<br>
-2. Launch a command prompt<br>
-3. Navigate to the zip file directory<br>
-4. Launch psql utility<br>
+Setup:
+========
+1. Download the tournament zip file<br>
+2. Extract the zip file to a directory<br>
+3. Launch a command prompt<br>
+4. Navigate to the zip file directory<br>
+5. Launch psql utility<br>
 	execute: psql tournament<br>
-5. Import the tournament.sql file (Creates db and tables)<br>
+6. Create the Database<br>
+	a. Either import the tournament.sql db file or execute: CREATE DATABASE tournament;<br>
+	b. Import the tournament.sql file. Creates the database, connects to the database and creates the tables.<br>
 	execute: \i tournament.sql<br>
-6. Stop psql utility<br>
+7. Stop psql utility<br>
 	hit 'ctrl + z'<br>
-7. Execute the tests from the command prompt:<br>
-   execute: python tournament_test.py<br>
+8. Navigate to the directory containing the tournament_test.py file
+9. Execute the tests from the command prompt:<br>
+   	execute: python tournament_test.py<br>
 
 Credits to Udacity & Stackoverflow
